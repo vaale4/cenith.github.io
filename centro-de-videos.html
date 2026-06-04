@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Cenith | Centro de Videos</title>
+
+<link rel="stylesheet" href="centro-de-videos.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+<div class="cursor-glow"></div>
+<div class="transition-overlay">
+
+    <div class="panel left"></div>
+    <div class="panel right"></div>
+
+</div>
+<canvas id="particles"></canvas>
+<header>
+    <div class="logo">
+
+        <h2>
+            Cenith
+        </h2>
+
+    </div>
+    <nav>
+
+        <a href="pantalla-de-inicio.html">
+            Inicio
+        </a>
+
+        <a href="herramientas.html">
+            Herramientas
+        </a>
+
+        <a href="centro-de-videos.html" class="active">
+            Centro de Videos
+        </a>
+
+    </nav>
+
+    <div class="header-buttons">
+
+        <button id="themeToggle">
+
+            🌙
+
+        </button>
+
+
+    </div>
+
+</header>
+
+<section class="hero-videos">
+
+    <div class="hero-overlay"></div>
+
+    <div class="hero-content">
+
+        <span>
+            Centro Cinemático
+        </span>
+
+        <h1>
+
+            Explora contenido visual sobre ansiedad y estrés académico.
+
+        </h1>
+
+        <p>
+
+            Un espacio diseñado para reflexionar, comprender emociones
+            y conectar con experiencias relacionadas al bienestar estudiantil.
+
+        </p>
+
+    </div>
+
+</section>
+
+<section class="videos-section">
+
+    <div class="video-card">
+
+        <div class="video-info">
+
+            <span>
+                Video 01
+            </span>
+
+            <h2>
+                Ansiedad Académica
+            </h2>
+
+        </div>
+
+       <video controls preload="metadata">
+    <source src="Videos/Cortometraje ansiedad.mp4" type="video/mp4">
+    Tu navegador no soporta video.
+</video>
+
+    </div>
+
+    <div class="video-card">
+
+        <div class="video-info">
+
+            <span>
+                Video 02
+            </span>
+
+            <h2>
+                Estrés Estudiantil
+            </h2>
+
+        </div>
+
+        <video controls preload="metadata">
+    <source src="Videos/Estres-stopmotion.mp4" type="video/mp4">
+    Tu navegador no soporta video.
+</video>
+
+    </div>
+
+</section>
+
+<section class="quote-section">
+
+    <div class="quote-card">
+
+        <h2>
+
+            “Tu mente también necesita pausas.”
+
+        </h2>
+
+        <p>
+
+            Aprender también implica cuidar tu bienestar emocional.
+
+        </p>
+
+    </div>
+
+</section>
+
+
+<footer>
+
+    <div>
+
+        <h3>
+            Cenith
+        </h3>
+
+        <p>
+            Plataforma interactiva para bienestar académico.
+        </p>
+
+    </div>
+
+     <div>
+<h3> 
+    Nuestras Redes Sociales
+</h3>
+        <a href="https://www.instagram.com/vaale.vz?igsh=aGh6bzVneGZuOGU3">
+            Contacto:  Valeria Sánchez
+        </a>
+
+    </div>
+
+    <div>
+
+        <a href="https://www.instagram.com/nny_scc?igsh=MWdhbGM0MXJoOGY4NQ==">
+            Contacto: Daniela Sánchez
+        </a>
+
+    </div>
+
+</footer>
+<script>
+
+const glow =
+document.querySelector(".cursor-glow");
+
+document.addEventListener("mousemove", e => {
+
+    glow.style.left =
+    e.clientX + "px";
+
+    glow.style.top =
+    e.clientY + "px";
+});
+
+const canvas =
+document.getElementById("particles");
+
+const ctx =
+canvas.getContext("2d");
+
+canvas.width =
+window.innerWidth;
+
+canvas.height =
+window.innerHeight;
+
+let mouse = {
+
+    x: canvas.width / 2,
+    y: canvas.height / 2
+};
+
+window.addEventListener("mousemove", (e) => {
+
+    mouse.x = e.x;
+    mouse.y = e.y;
+});
+
+let particles = [];
+
+for(let i = 0; i < 90; i++){
+
+    particles.push({
+
+        x: Math.random() * canvas.width,
+        y: Math.random() * canvas.height,
+
+        r: Math.random() * 2.5,
+
+        dx: (Math.random() - 0.5) * 0.5,
+        dy: (Math.random() - 0.5) * 0.5
+    });
+}
+
+function animateParticles(){
+
+    ctx.clearRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
+
+    particles.forEach(p => {
+
+        let dx = mouse.x - p.x;
+        let dy = mouse.y - p.y;
+
+        let dist =
+        Math.sqrt(dx * dx + dy * dy);
+
+        if(dist < 150){
+
+            p.x -= dx * 0.008;
+            p.y -= dy * 0.008;
+        }
+
+        p.x += p.dx;
+        p.y += p.dy;
+
+        ctx.beginPath();
+
+        if(document.body.classList.contains("dark-mode")){
+
+            ctx.fillStyle =
+            "rgba(167,139,250,0.35)";
+
+        }else{
+
+            ctx.fillStyle =
+            "rgba(124,58,237,0.35)";
+        }
+
+        ctx.arc(
+            p.x,
+            p.y,
+            p.r,
+            0,
+            Math.PI * 2
+        );
+
+        ctx.fill();
+    });
+
+    requestAnimationFrame(
+        animateParticles
+    );
+}
+
+animateParticles();
+
+const themeToggle =
+document.getElementById("themeToggle");
+
+if(localStorage.getItem("theme") === "dark"){
+
+    document.body.classList.add("dark-mode");
+
+    themeToggle.innerHTML = "☀️";
+}
+
+themeToggle.addEventListener("click", () => {
+
+    document.body.classList.toggle("dark-mode");
+
+    if(document.body.classList.contains("dark-mode")){
+
+        localStorage.setItem("theme", "dark");
+
+        themeToggle.innerHTML = "☀️";
+
+    }else{
+
+        localStorage.setItem("theme", "light");
+
+        themeToggle.innerHTML = "🌙";
+    }
+
+});
+
+</script>
+
+</body>
+</html>

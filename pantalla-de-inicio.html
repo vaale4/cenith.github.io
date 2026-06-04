@@ -1,0 +1,621 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cenith</title>
+<link rel="stylesheet" href="pantalla-de-inicio.css">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="loader">
+    <div class="loader-content">
+        <h1 class="loader-logo">
+            CENITH
+        </h1>
+        <p>   Equilibrio entre mente y rendimiento académico</p>
+    </div>
+
+</div>
+
+
+
+<div class="cursor-glow"></div>
+
+
+<canvas id="particles"></canvas>
+
+
+<header>
+    
+
+    <div class="logo">
+
+        <h2>
+            Cenith
+        </h2>
+
+    </div>
+
+    <nav>
+
+        <a href="pantalla-de-inicio.html" class="active">
+            Inicio
+        </a>
+
+        <a href="herramientas.html">
+            Herramientas
+        </a>
+
+        <a href="centro-de-videos.html">
+            Centro de Videos
+        </a>
+
+
+    </nav>
+
+    <div class="header-buttons">
+        <button id="themeToggle">
+
+            🌙
+
+        </button>
+    </div>
+
+</header>
+
+
+<section class="hero">
+
+    <div class="hero-left">
+        <p id="statusText">
+    Analizando tu estado académico...
+</p>
+
+        <span class="hero-badge">
+
+            Plataforma de Bienestar Académico
+
+        </span>
+
+        <h1>
+
+            Encuentra equilibrio entre tu mente y tu rendimiento académico.
+
+        </h1>
+
+        <p>
+
+            Cenith es una plataforma creada para ayudar estudiantes a reducir el estrés académico,
+            mejorar su organización, aumentar su concentración y fortalecer su bienestar emocional
+            mediante herramientas interactivas y experiencias digitales modernas.
+
+        </p>
+
+        <div class="hero-buttons">
+
+            <a href="Comenzar.html">
+
+                <button class="primary-btn">
+
+                    Comenzar
+
+                </button>
+
+            </a>
+
+            <a href="Herramientas.html">
+
+                <button class="secondary-btn">
+
+                    Explorar Herramientas
+
+                </button>
+
+            </a>
+
+        </div>
+
+    </div>
+
+    <div class="hero-right">
+
+        <div class="floating-card main-card">
+
+            <h3>
+                Estado Académico
+            </h3>
+
+            <div class="mini-bar">
+
+                <div class="fill fill-purple"></div>
+
+            </div>
+
+            <span>
+                Estrés Moderado
+            </span>
+
+        </div>
+
+        <div class="floating-card second-card">
+
+            <h3>
+                Productividad
+            </h3>
+
+            <div class="mini-bar">
+
+                <div class="fill fill-green"></div>
+
+            </div>
+
+            <span>
+                82% Productividad
+            </span>
+
+        </div>
+
+        <div class="floating-card third-card">
+
+            <h3>
+                Sesión Focus
+            </h3>
+
+            <div class="circle-preview">
+
+                25m
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+<section class="emotions-section">
+
+    <div class="section-title">
+
+        <span>
+            Estado emocional
+        </span>
+
+        <h2>
+            ¿Cómo te sientes hoy?
+        </h2>
+
+    </div>
+
+    <div class="emotion-grid">
+
+        <div class="emotion-card" data-message="Tu mente necesita descanso y organización.">
+
+            <h3>
+                Cansado
+            </h3>
+
+        </div>
+
+        <div class="emotion-card" data-message="Respira. No necesitas resolver todo al mismo tiempo.">
+
+            <h3>
+                Ansioso
+            </h3>
+
+        </div>
+
+        <div class="emotion-card" data-message="Divide tus tareas en pequeños pasos.">
+
+            <h3>
+                Saturado
+            </h3>
+
+        </div>
+
+        <div class="emotion-card" data-message="Recuerda por qué comenzaste.">
+
+            <h3>
+                Desmotivado
+            </h3>
+
+        </div>
+
+        <div class="emotion-card" data-message="Aprovecha este momento para avanzar.">
+
+            <h3>
+                Tranquilo
+            </h3>
+
+        </div>
+
+    </div>
+
+    <div class="emotion-response">
+
+        <p id="emotionText">
+
+            Selecciona cómo te sientes para recibir una recomendación.
+
+        </p>
+
+    </div>
+
+</section>
+
+
+<section class="about">
+
+    <div class="about-left">
+
+        <span>
+            ¿Qué significa Cenith?
+        </span>
+
+        <h2>
+
+            Representa el punto más alto que una persona puede alcanzar.
+
+        </h2>
+
+    </div>
+
+    <div class="about-right">
+
+        <p>
+
+            Cenith nace con el objetivo de ayudar estudiantes a enfrentar
+            el estrés académico desde una perspectiva moderna, visual e interactiva.
+
+        </p>
+
+        <p>
+
+            Más que una página educativa, busca convertirse en un espacio digital
+            donde los estudiantes puedan organizarse, relajarse y recuperar el equilibrio.
+
+        </p>
+
+    </div>
+
+</section>
+
+
+<section class="focus-mode">
+
+    <div class="focus-overlay"></div>
+
+    <div class="focus-content">
+
+        <span>
+            Focus Mode
+        </span>
+
+        <h2>
+
+            Concéntrate solo en el siguiente paso.
+
+        </h2>
+
+        <p>
+
+            Elimina distracciones y entra en un entorno minimalista
+            diseñado para estudiar con máxima concentración.
+
+        </p>
+
+        <button id="focusBtn">
+
+            Activar Modo Focus
+
+        </button>
+
+    </div>
+
+</section>
+
+<section class="quote-section">
+
+    <div class="quote-card">
+
+        <h2>
+
+            “A veces avanzar lento también es avanzar.”
+
+        </h2>
+
+        <p>
+
+            Tu bienestar emocional también forma parte del aprendizaje.
+
+        </p>
+
+    </div>
+
+</section>
+
+
+<footer>
+
+    <div>
+
+        <h3>Cenith</h3>
+
+        <p>
+            Plataforma interactiva para bienestar académico.
+        </p>
+
+    </div>
+
+    <div>
+
+        <h3>Nuestras Redes Sociales</h3>
+
+        <ul class="social-list">
+
+            <li>
+                <a href="https://www.instagram.com/vaale.vz?igsh=aGh6bzVneGZuOGU3">
+                    Valeria Sánchez
+                </a>
+            </li>
+
+            <li>
+                <a href="https://www.instagram.com/nny_scc?igsh=MWdhbGM0MXJoOGY4NQ==">
+                    Daniela Sánchez
+                </a>
+            </li>
+
+        </ul>
+
+    </div>
+
+    <script>
+
+setTimeout(() => {
+
+    const loader =
+    document.getElementById("loader");
+
+    loader.style.display = "none";
+
+}, 1800);
+
+const canvas =
+document.getElementById("particles");
+
+if(canvas){
+
+    const ctx =
+    canvas.getContext("2d");
+
+    canvas.width =
+    window.innerWidth;
+
+    canvas.height =
+    window.innerHeight;
+
+    let particles = [];
+
+    for(let i = 0; i < 100; i++){
+
+        particles.push({
+
+            x:Math.random() * canvas.width,
+            y:Math.random() * canvas.height,
+
+            r:Math.random() * 3 + 1,
+
+            dx:(Math.random() - 0.5) * 0.5,
+            dy:(Math.random() - 0.5) * 0.5
+        });
+    }
+
+    function animateParticles(){
+
+        ctx.clearRect(
+            0,
+            0,
+            canvas.width,
+            canvas.height
+        );
+
+        particles.forEach(p => {
+
+            p.x += p.dx;
+            p.y += p.dy;
+
+            if(p.x < 0 || p.x > canvas.width){
+
+                p.dx *= -1;
+
+            }
+
+            if(p.y < 0 || p.y > canvas.height){
+
+                p.dy *= -1;
+
+            }
+
+            ctx.beginPath();
+
+            ctx.fillStyle =
+            "rgba(124,58,237,0.35)";
+
+            ctx.arc(
+                p.x,
+                p.y,
+                p.r,
+                0,
+                Math.PI * 2
+            );
+
+            ctx.fill();
+
+        });
+
+        requestAnimationFrame(
+            animateParticles
+        );
+    }
+
+    animateParticles();
+
+    window.addEventListener("resize", () => {
+
+        canvas.width =
+        window.innerWidth;
+
+        canvas.height =
+        window.innerHeight;
+
+    });
+
+}
+
+
+const glow =
+document.querySelector(".cursor-glow");
+
+if(glow){
+
+    document.addEventListener("mousemove", e => {
+
+        glow.style.left =
+        e.clientX + "px";
+
+        glow.style.top =
+        e.clientY + "px";
+
+    });
+
+}
+
+const emotionCards =
+document.querySelectorAll(".emotion-card");
+
+const emotionText =
+document.getElementById("emotionText");
+
+if(emotionCards.length > 0 && emotionText){
+
+    emotionCards.forEach(card => {
+
+        card.addEventListener("click", () => {
+
+            emotionText.innerText =
+            card.dataset.message;
+
+        });
+
+    });
+
+}
+
+
+const themeToggle =
+document.getElementById("themeToggle");
+
+if(themeToggle){
+
+    themeToggle.addEventListener("click", () => {
+
+        document.body.classList.toggle("dark-mode");
+
+        if(document.body.classList.contains("dark-mode")){
+
+            themeToggle.innerHTML = "☀️";
+
+        }else{
+
+            themeToggle.innerHTML = "🌙";
+
+        }
+
+    });
+
+}
+
+
+
+const focusBtn =
+document.getElementById("focusBtn");
+
+if(focusBtn){
+
+    focusBtn.addEventListener("click", () => {
+
+        document.body.classList.toggle("focus-active");
+
+    });
+
+}
+
+
+const cards =
+document.querySelectorAll(
+".floating-card, .dashboard-card, .emotion-card"
+);
+
+if(cards.length > 0){
+
+    cards.forEach(card => {
+
+        card.addEventListener("mousemove", e => {
+
+            const rect =
+            card.getBoundingClientRect();
+
+            const x =
+            e.clientX - rect.left;
+
+            const y =
+            e.clientY - rect.top;
+
+            const rotateX =
+            ((y / rect.height) - 0.5) * -10;
+
+            const rotateY =
+            ((x / rect.width) - 0.5) * 10;
+
+            card.style.transform =
+            `
+            perspective(1000px)
+            rotateX(${rotateX}deg)
+            rotateY(${rotateY}deg)
+            scale(1.03)
+            `;
+
+        });
+
+        card.addEventListener("mouseleave", () => {
+
+            card.style.transform =
+            `
+            perspective(1000px)
+            rotateX(0)
+            rotateY(0)
+            scale(1)
+            `;
+
+        });
+
+    });
+
+}
+
+
+function logout(){
+
+    console.log("Cerrar sesión");
+
+}
+
+
+    </script>
+
+</footer>
+</body>
+</html>

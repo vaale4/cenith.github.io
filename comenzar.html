@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cenith | Evaluación Inteligente</title>
+
+    <link rel="stylesheet" href="comenzar.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+
+<div class="aurora"></div>
+<div class="cursor-glow"></div>
+<div class="loading-screen" id="loadingScreen">
+    <h2>Analizando tus datos...</h2>
+    <div class="loader-bar"></div>
+</div>
+
+<header class="header">
+
+    <div class="logo">
+
+        <h2>Cenith</h2>
+
+    </div>
+
+    <nav>
+
+        <a href="pantalla-de-inicio.html" >
+            Inicio
+        </a>
+
+        <a href="herramientas.html">
+            Herramientas
+        </a>
+
+        <a href="centro-de-videos.html">
+            Centro de Videos
+        </a>
+
+  
+
+    </nav>
+
+    <div class="header-buttons">
+
+        <button id="themeToggle">
+
+            🌙
+
+        </button>
+
+    </div>
+</header>
+<section class="hero">
+
+    <div class="hero-text">
+        <h1>Evaluación Inicial</h1>
+        <p>
+            Descubre tu nivel de estrés académico con un análisis rápido.
+        </p>
+    </div>
+
+</section>
+
+<section class="container">
+
+    <div class="step active">
+        <h2>¿Cuál es tu nombre?</h2>
+        <input type="text" id="nombre">
+        <button onclick="nextStep()">Continuar</button>
+    </div>
+
+    <div class="step">
+        <h2>¿Cuál es tu edad?</h2>
+        <input type="number" id="edad">
+        <button onclick="nextStep()">Continuar</button>
+    </div>
+
+    <div class="step">
+        <h2>Nivel de estrés académico</h2>
+        <select id="estres">
+            <option>Bajo</option>
+            <option>Moderado</option>
+            <option>Alto</option>
+        </select>
+        <button onclick="nextStep()">Continuar</button>
+    </div>
+
+    <div class="step">
+        <h2>Horas de estudio al día</h2>
+        <input type="number" id="horas">
+        <button onclick="nextStep()">Continuar</button>
+    </div>
+
+    <div class="step">
+        <h2>¿Te distraes fácilmente?</h2>
+        <select id="distracciones">
+            <option>Sí</option>
+            <option>No</option>
+            <option>A veces</option>
+        </select>
+        <button onclick="nextStep()">Continuar</button>
+    </div>
+
+    <div class="step">
+        <h2>¿Duermes correctamente?</h2>
+        <select id="sueno">
+            <option>Sí</option>
+            <option>No</option>
+            <option>A veces</option>
+        </select>
+
+        <button onclick="startAnalysis()">Finalizar análisis</button>
+    </div>
+
+</section>
+
+
+<section class="resultado-container">
+
+    <div id="resultado"></div>
+
+</section>
+
+<script>
+
+let tx = 0, ty = 0;
+let x = 0, y = 0;
+
+document.addEventListener("mousemove", (e) => {
+    tx = e.clientX;
+    ty = e.clientY;
+});
+
+function animateAurora() {
+    x += (tx - x) * 0.08;
+    y += (ty - y) * 0.08;
+
+    document.documentElement.style.setProperty("--x", x + "px");
+    document.documentElement.style.setProperty("--y", y + "px");
+
+    requestAnimationFrame(animateAurora);
+}
+
+animateAurora();
+let stepIndex = 0;
+const steps = document.querySelectorAll(".step");
+
+function showStep(i){
+    steps.forEach(s => s.classList.remove("active"));
+    if(steps[i]) steps[i].classList.add("active");
+}
+
+function nextStep(){
+    stepIndex++;
+    showStep(stepIndex);
+}
+
+showStep(0);
+
+
+function startAnalysis(){
+
+    const loading = document.getElementById("loadingScreen");
+    const result = document.getElementById("resultado");
+
+    loading.style.display = "flex";
+
+    result.innerHTML = "";
+
+    setTimeout(() => {
+
+        loading.style.display = "none";
+
+        obtenerRecomendaciones();
+
+        result.scrollIntoView({ behavior: "smooth" });
+
+    }, 2200);
+}
+
+const motivacionesBajo = [
+"Estás construyendo una disciplina silenciosa que pocos logran mantener.",
+"Tu estabilidad mental hoy es una ventaja real.",
+"Sigues avanzando aunque no lo notes.",
+"Tu calma es tu base más fuerte.",
+"No estás atrasado, estás consolidando.",
+"Lo que haces bien hoy te protege mañana.",
+"Tu equilibrio es progreso real.",
+"Estás mejor de lo que crees.",
+"No necesitas velocidad, necesitas constancia.",
+"Estás formando una mente estable."
+];
+
+const motivacionesMedio = [
+"Estás en el punto donde muchos se rompen… pero tú sigues.",
+"No es falta de capacidad, es saturación.",
+"Tu mente necesita orden, no presión.",
+"No eres menos capaz, estás sobrecargado.",
+"Ajustar tu ritmo lo cambia todo.",
+"El problema no eres tú, es el exceso.",
+"Si te organizas, esto mejora rápido.",
+"Estás más cerca de lo que crees.",
+"No necesitas hacer más, necesitas hacer mejor.",
+"Esto es manejable si lo simplificas."
+];
+
+const motivacionesAlto = [
+"Esto no es fracaso, es saturación.",
+"No tienes que demostrar nada hoy.",
+"Tu mente necesita pausa, no presión.",
+"Aguantar más no es avanzar.",
+"Estás cargando demasiado solo.",
+"No estás roto, estás saturado.",
+"Esto no es el final.",
+"Tu valor no depende de resistir.",
+"A veces parar es avanzar.",
+"Respirar también es progreso."
+];
+
+let recomendaciones = [];
+let herramientas = []
+function obtenerRecomendaciones(){
+
+    const nombre = document.getElementById("nombre").value;
+    const estres = document.getElementById("estres").value;
+    const horas = Number(document.getElementById("horas").value);
+    const distracciones = document.getElementById("distracciones").value;
+    const sueno = document.getElementById("sueno").value;
+
+    let porcentaje = 0;
+
+
+    if(estres === "Alto") porcentaje += 70;
+    if(estres === "Moderado") porcentaje += 45;
+    if(estres === "Bajo") porcentaje += 20;
+
+    if(distracciones === "Sí") porcentaje += 15;
+    if(sueno === "No") porcentaje += 20;
+    if(horas < 2) porcentaje += 15;
+
+    if(porcentaje > 100) porcentaje = 100;
+
+    recomendaciones = [];
+    herramientas = [];
+
+    if (estres === "Alto") {
+        recomendaciones.push(
+            "Tu mente está saturada, no necesitas más esfuerzo sino estrategia.",
+            "Reduce tareas a lo esencial hoy.",
+            "Evita multitarea completamente.",
+            "Haz pausas cada 20 minutos.",
+            "Respira antes de iniciar cualquier tarea."
+        );
+
+        herramientas.push("Respiración guiada", "Modo Enfoque");
+    }
+
+    if (estres === "Moderado") {
+        recomendaciones.push(
+            "Estás en carga media, necesitas orden no presión.",
+            "Organiza por prioridad real.",
+            "Divide tareas grandes en pequeñas.",
+            "Evita distracciones digitales.",
+            "Mantén constancia, no intensidad."
+        );
+
+        herramientas.push("Pomodoro", "Agenda");
+    }
+
+    if (estres === "Bajo") {
+        recomendaciones.push(
+            "Tu equilibrio es bueno, solo optimiza tu sistema.",
+            "Mantén hábitos actuales.",
+            "No necesitas cambios grandes.",
+            "Estás en un buen punto mental.",
+            "Sigue así, estás estable."
+        );
+
+        herramientas.push("Agenda");
+    }
+
+    if (horas < 2) {
+        recomendaciones.push(
+            "Estás estudiando poco tiempo, empieza con bloques de 25 min.",
+            "Aumenta gradualmente sin presión.",
+            "La constancia es más importante que la duración."
+        );
+
+        herramientas.push("Pomodoro");
+    }
+
+    if (horas >= 2 && horas <= 5) {
+        recomendaciones.push(
+            "Tus horas son buenas, mejora la calidad.",
+            "Evita distracciones entre bloques.",
+            "Mantén descansos cortos."
+        );
+
+        herramientas.push("Pomodoro");
+    }
+
+    if (horas > 5) {
+        recomendaciones.push(
+            "Estás estudiando mucho, cuida tu energía mental.",
+            "Sin pausas puedes saturarte.",
+            "Prioriza descanso activo."
+        );
+
+        herramientas.push("Respiración guiada");
+    }
+
+  
+    if (sueno === "No") {
+        recomendaciones.push(
+            "Tu sueño está afectando tu rendimiento.",
+            "Evita pantallas antes de dormir.",
+            "Mejora tu rutina nocturna."
+        );
+
+        herramientas.push("Respiración guiada");
+    }
+
+    if (sueno === "Sí") {
+        recomendaciones.push(
+            "Tu descanso está bien, es una ventaja."
+        );
+    }
+
+
+    if (distracciones === "Sí") {
+        recomendaciones.push(
+            "Te distraes fácilmente, controla el entorno.",
+            "Apaga notificaciones.",
+            "Usa un lugar fijo para estudiar."
+        );
+
+        herramientas.push("Modo Enfoque");
+    }
+
+    if (
+        estres === "Bajo" &&
+        horas >= 2 &&
+        sueno === "Sí" &&
+        distracciones === "No"
+    ) {
+        recomendaciones.push(
+            "Tu sistema está equilibrado.",
+            "No necesitas cambios grandes.",
+            "Solo mantén tu ritmo actual."
+        );
+    }
+
+    document.getElementById("resultado").innerHTML = `
+        <div class="card-result">
+            <h2>Hola ${nombre}</h2>
+            <p>${recomendaciones[Math.floor(Math.random()*recomendaciones.length)]}</p>
+        </div>
+
+        <div class="card-result">
+            <h3>Nivel de estrés</h3>
+
+            <div class="bar">
+                <div class="fill" id="fillBar" style="width:${porcentaje}%"></div>
+            </div>
+
+            <p>${porcentaje}% estimado</p>
+        </div>
+
+        <div class="card-result">
+            <h3>Herramientas recomendadas</h3>
+
+            <div class="tools-horizontal">
+                ${[...new Set(herramientas)].map(t => `
+                    <div class="tool-card">
+                        <h4>${t}</h4>
+                        <p>
+                            ${t === "Pomodoro" ? "Trabajo por bloques de tiempo." : ""}
+                            ${t === "Respiración guiada" ? "Reduce ansiedad y regula estrés." : ""}
+                            ${t === "Agenda" ? "Organiza tu día correctamente." : ""}
+                            ${t === "Modo Enfoque" ? "Elimina distracciones digitales." : ""}
+                        </p>
+                    </div>
+                `).join("")}
+            </div>
+        </div>
+    `;
+
+   
+    const fill = document.getElementById("fillBar");
+
+    if(fill){
+        if(porcentaje <= 30){
+            fill.style.background = "linear-gradient(90deg,#22c55e,#86efac)";
+        }
+        else if(porcentaje <= 60){
+            fill.style.background = "linear-gradient(90deg,#facc15,#fb923c)";
+        }
+        else{
+            fill.style.background = "linear-gradient(90deg,#ef4444,#7f1d1d)";
+        }
+    }
+}
+
+    /* MOTIVACIÓN */
+    let motivacion = "";
+
+    if(estres === "Bajo"){
+        motivacion = motivacionesBajo[Math.floor(Math.random()*motivacionesBajo.length)];
+    }
+
+    if(estres === "Moderado"){
+        motivacion = motivacionesMedio[Math.floor(Math.random()*motivacionesMedio.length)];
+    }
+
+    if(estres === "Alto"){
+        motivacion = motivacionesAlto[Math.floor(Math.random()*motivacionesAlto.length)];
+    }
+
+    /* RENDER */
+    document.getElementById("resultado").innerHTML = `
+        <div class="card-result">
+            <h2>Hola ${nombre}</h2>
+            <p>${motivacion}</p>
+        </div>
+
+        <div class="card-result">
+            <h3>Nivel de estrés</h3>
+
+            <div class="bar">
+                <div class="fill" id="fillBar" style="width:${porcentaje}%"></div>
+            </div>
+
+            <p>${porcentaje}% estimado</p>
+        </div>
+    `;
+
+    /* COLOR BAR FIX */
+    const fill = document.getElementById("fillBar");
+
+    if(fill){
+
+        if(porcentaje <= 30){
+            fill.style.background = "linear-gradient(90deg,#22c55e,#86efac)";
+        }
+        else if(porcentaje <= 60){
+            fill.style.background = "linear-gradient(90deg,#facc15,#fb923c)";
+        }
+        else{
+            fill.style.background = "linear-gradient(90deg,#ef4444,#7f1d1d)";
+        }
+
+    }
+
+</script>
+<script>const themeToggle =
+document.getElementById("themeToggle");
+
+
+if(localStorage.getItem("theme") === "dark"){
+
+    document.body.classList.add("dark-mode");
+
+    themeToggle.innerHTML = "☀️";
+}
+
+themeToggle.addEventListener("click", () => {
+
+    document.body.classList.toggle("dark-mode");
+
+    if(document.body.classList.contains("dark-mode")){
+
+        localStorage.setItem("theme", "dark");
+
+        themeToggle.innerHTML = "☀️";
+
+    }else{
+
+        localStorage.setItem("theme", "light");
+
+        themeToggle.innerHTML = "🌙";
+    }
+
+});</script>
+
+</body>
+</html>

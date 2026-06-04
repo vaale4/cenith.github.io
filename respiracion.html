@@ -1,0 +1,533 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Respiración Guiada</title>
+
+<link rel="stylesheet" href="respiracion.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+<header>
+
+   <div class="logo">
+
+        <h2>
+            Cenith
+        </h2>
+
+    </div>
+
+    <nav>
+
+        <a href="pantalla-de-inicio.html" class="active">
+            Inicio
+        </a>
+
+        <a href="herramientas.html">
+            Herramientas
+        </a>
+
+        <a href="centro-de-videos.html">
+            Centro de Videos
+        </a>
+
+        <a href="#">
+            Contacto
+        </a>
+
+    </nav>
+
+    <div class="header-buttons">
+
+        <button id="themeToggle">
+
+            🌙
+
+        </button>
+
+    </div>
+
+</header>
+
+<section class="setup-container" id="setupContainer">
+
+    <h1>
+        Respiración Guiada
+    </h1>
+
+    <p class="subtitle">
+        Selecciona una técnica y tu estado emocional.
+    </p>
+    <div class="setup-box">
+
+        <label>
+            Técnica de respiración
+        </label>
+
+        <select id="technique">
+
+            <option value="box">
+                Box Breathing
+            </option>
+
+            <option value="relax">
+                Relajación
+            </option>
+
+            <option value="sleep">
+                Dormir
+            </option>
+
+            <option value="focus">
+                Concentración
+            </option>
+
+        </select>
+
+    </div>
+    <div class="setup-box">
+
+        <label>
+            ¿Cómo te sientes?
+        </label>
+
+        <select id="mentalState">
+
+            <option value="ansioso">
+                Ansioso
+            </option>
+
+            <option value="saturado">
+                Saturado
+            </option>
+
+            <option value="cansado">
+                Cansado
+            </option>
+
+            <option value="tranquilo">
+                Tranquilo
+            </option>
+
+        </select>
+
+    </div>
+
+    <button class="start-btn" onclick="startSetup()">
+        Comenzar sesión
+    </button>
+
+</section>
+<section class="breathing-container hidden" id="breathingContainer">
+
+    <h1 id="techniqueName">
+        Box Breathing
+    </h1>
+
+    <p class="subtitle" id="patternText">
+        Patrón: 4-4-4-4
+    </p>
+    <div class="session-info">
+
+        <div class="info-card">
+
+            <h3>
+                Duración
+            </h3>
+
+            <p id="durationText">
+                5 minutos
+            </p>
+
+        </div>
+
+        <div class="info-card">
+
+            <h3>
+                Ciclos restantes
+            </h3>
+
+            <p id="cyclesText">
+                10
+            </p>
+
+        </div>
+
+    </div>
+    <div class="breathing-circle" id="circle">
+
+        <div class="inner-circle">
+
+            <h2 id="instruction">
+                Inhala...
+            </h2>
+
+            <p id="count">
+                4
+            </p>
+
+        </div>
+
+    </div>
+    <div class="buttons">
+
+        <button onclick="stopBreathing()">
+            Detener
+        </button>
+
+        <button onclick="restartSetup()">
+            Cambiar técnica
+        </button>
+
+    </div>
+
+</section>
+
+<script>
+
+const setupContainer =
+    document.getElementById("setupContainer");
+
+const breathingContainer =
+    document.getElementById("breathingContainer");
+
+const instruction =
+    document.getElementById("instruction");
+
+const count =
+    document.getElementById("count");
+
+const circle =
+    document.getElementById("circle");
+
+const cyclesText =
+    document.getElementById("cyclesText");
+
+let phases = [];
+
+let currentPhase = 0;
+
+let breathingInterval;
+
+let totalCycles = 0;
+
+const techniques = {
+
+    box: {
+
+        name: "Box Breathing",
+
+        pattern: "4-4-4-4",
+
+        phases: [
+
+            {
+                text: "Inhala...",
+                seconds: 4,
+                scale: 1.2
+            },
+
+            {
+                text: "Mantén...",
+                seconds: 4,
+                scale: 1.2
+            },
+
+            {
+                text: "Exhala...",
+                seconds: 4,
+                scale: 1
+            },
+
+            {
+                text: "Mantén...",
+                seconds: 4,
+                scale: 1
+            }
+
+        ]
+    },
+
+    relax: {
+
+        name: "Relajación",
+
+        pattern: "4-4-6",
+
+        phases: [
+
+            {
+                text: "Inhala...",
+                seconds: 4,
+                scale: 1.2
+            },
+
+            {
+                text: "Mantén...",
+                seconds: 4,
+                scale: 1.2
+            },
+
+            {
+                text: "Exhala...",
+                seconds: 6,
+                scale: 1
+            }
+
+        ]
+    },
+
+    sleep: {
+
+        name: "Dormir",
+
+        pattern: "4-7-8",
+
+        phases: [
+
+            {
+                text: "Inhala...",
+                seconds: 4,
+                scale: 1.2
+            },
+
+            {
+                text: "Mantén...",
+                seconds: 7,
+                scale: 1.2
+            },
+
+            {
+                text: "Exhala...",
+                seconds: 8,
+                scale: 1
+            }
+
+        ]
+    },
+
+    focus: {
+
+        name: "Concentración",
+
+        pattern: "5-5",
+
+        phases: [
+
+            {
+                text: "Inhala...",
+                seconds: 5,
+                scale: 1.2
+            },
+
+            {
+                text: "Exhala...",
+                seconds: 5,
+                scale: 1
+            }
+
+        ]
+    }
+
+};
+
+const states = {
+
+    ansioso: {
+
+        minutes: 10,
+        cycles: 15
+    },
+
+    saturado: {
+
+        minutes: 6,
+        cycles: 10
+    },
+
+    cansado: {
+
+        minutes: 4,
+        cycles: 6
+    },
+
+    tranquilo: {
+
+        minutes: 3,
+        cycles: 4
+    }
+
+};
+
+
+function startSetup() {
+
+    const techniqueValue =
+        document.getElementById("technique").value;
+
+    const stateValue =
+        document.getElementById("mentalState").value;
+
+    const selectedTechnique =
+        techniques[techniqueValue];
+
+    const selectedState =
+        states[stateValue];
+
+    phases =
+        selectedTechnique.phases;
+
+    totalCycles =
+        selectedState.cycles;
+
+    document.getElementById("techniqueName")
+        .innerText =
+        selectedTechnique.name;
+
+    document.getElementById("patternText")
+        .innerText =
+        `Patrón: ${selectedTechnique.pattern}`;
+
+    document.getElementById("durationText")
+        .innerText =
+        `${selectedState.minutes} minutos`;
+
+    cyclesText.innerText =
+        totalCycles;
+
+
+    setupContainer.classList.add("hidden");
+
+    breathingContainer.classList.remove("hidden");
+
+    currentPhase = 0;
+
+    runPhase();
+}
+
+function runPhase() {
+
+    if (totalCycles <= 0) {
+
+        instruction.innerText =
+            "Sesión completada";
+
+        count.innerText =
+            "✓";
+
+        return;
+    }
+
+    const phase =
+        phases[currentPhase];
+
+    instruction.innerText =
+        phase.text;
+
+    let timeLeft =
+        phase.seconds;
+
+    count.innerText =
+        timeLeft;
+
+    circle.style.transform =
+        `scale(${phase.scale})`;
+
+    breathingInterval =
+        setInterval(() => {
+
+            timeLeft--;
+
+            count.innerText =
+                timeLeft;
+
+            if (timeLeft <= 0) {
+
+                clearInterval(breathingInterval);
+
+                currentPhase++;
+
+                if (currentPhase >= phases.length) {
+
+                    currentPhase = 0;
+
+                    totalCycles--;
+
+                    cyclesText.innerText =
+                        totalCycles;
+                }
+
+                runPhase();
+            }
+
+        }, 1000);
+}
+
+function stopBreathing() {
+
+    clearInterval(breathingInterval);
+
+    instruction.innerText =
+        "Pausado";
+
+    count.innerText =
+        "--";
+
+    circle.style.transform =
+        "scale(1)";
+}
+
+function restartSetup() {
+
+    clearInterval(breathingInterval);
+
+    breathingContainer.classList.add("hidden");
+
+    setupContainer.classList.remove("hidden");
+}
+
+</script>
+<script>
+
+const themeToggle =
+document.getElementById("themeToggle");
+
+if(localStorage.getItem("theme") === "dark"){
+
+    document.body.classList.add("dark-mode");
+
+    themeToggle.innerHTML = "☀️";
+}
+
+
+themeToggle.addEventListener("click", () => {
+
+    document.body.classList.toggle("dark-mode");
+
+    if(document.body.classList.contains("dark-mode")){
+
+        localStorage.setItem("theme", "dark");
+
+        themeToggle.innerHTML = "☀️";
+
+    }else{
+
+        localStorage.setItem("theme", "light");
+
+        themeToggle.innerHTML = "🌙";
+    }
+
+});
+
+</script>
+
+</body>
+</html>

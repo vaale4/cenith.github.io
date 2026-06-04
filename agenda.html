@@ -1,0 +1,555 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Agenda</title>
+
+    <link rel="stylesheet" href="agenda.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+<header>
+
+   <div class="logo">
+
+        <h2>
+            Cenith
+        </h2>
+
+    </div>
+
+    <nav>
+
+        <a href="pantalla-de-inicio.html" class="active">
+            Inicio
+        </a>
+
+        <a href="herramientas.html">
+            Herramientas
+        </a>
+
+        <a href="centro-de-videos.html">
+            Centro de Videos
+        </a>
+
+    </nav>
+
+    <div class="header-buttons">
+
+        <button id="themeToggle">
+
+            🌙
+
+        </button>
+
+    </div>
+</header>
+
+
+<section class="hero">
+
+    <h1>
+        Agenda
+    </h1>
+
+    <p>
+        Organiza tareas, controla tu carga académica
+        y estudia con flashcards interactivas.
+    </p>
+
+</section>
+
+
+<section class="dashboard">
+
+
+    <aside class="sidebar">
+
+
+        <div class="calendar-card">
+
+            <div class="calendar-top">
+
+                <button id="prevMonth">
+                    ‹
+                </button>
+
+                <div class="calendar-selectors">
+
+                    <select id="monthSelect"></select>
+
+                    <select id="yearSelect"></select>
+
+                </div>
+
+                <button id="nextMonth">
+                    ›
+                </button>
+
+            </div>
+
+            <div class="calendar-days">
+
+                <span>L</span>
+                <span>M</span>
+                <span>M</span>
+                <span>J</span>
+                <span>V</span>
+                <span>S</span>
+                <span>D</span>
+
+            </div>
+
+      
+            <div
+                class="calendar-grid"
+                id="calendarGrid"
+            >
+
+            </div>
+
+        </div>
+
+     
+
+        <div class="load-card">
+
+            <div class="load-header">
+
+                <h3>
+                    Carga académica
+                </h3>
+
+                <span id="loadPercentage">
+                    0%
+                </span>
+
+            </div>
+
+            <div class="load-bar">
+
+                <div
+                    class="load-progress"
+                    id="loadProgress"
+                ></div>
+
+            </div>
+
+            <p id="loadMessage">
+
+                Tu carga académica está equilibrada.
+
+            </p>
+
+        </div>
+
+
+        <div class="stats-card">
+
+            <h3>
+                Estadísticas
+            </h3>
+
+            <div class="stat">
+
+                <span>
+                    Tareas completadas
+                </span>
+
+                <strong id="completedTasks">
+                    0
+                </strong>
+
+            </div>
+
+            <div class="stat">
+
+                <span>
+                    Tareas pendientes
+                </span>
+
+                <strong id="pendingTasks">
+                    0
+                </strong>
+
+            </div>
+
+            <div class="stat">
+
+                <span>
+                    Flashcards creadas
+                </span>
+
+                <strong id="flashcardsCount">
+                    0
+                </strong>
+
+            </div>
+
+        </div>
+
+    </aside>
+
+
+    <main class="content">
+
+  
+        <div class="motivation-card">
+
+            <div class="motivation-top">
+
+                <div>
+
+                    <h2>
+                        Motivación del día
+                    </h2>
+
+                    <p class="motivation-subtitle">
+
+                        Recomendaciones dinámicas según tu progreso académico.
+
+                    </p>
+
+                </div>
+
+                <div class="motivation-icon">
+
+                    <div class="pulse-ring"></div>
+
+                    <span>
+                        +
+                    </span>
+
+                </div>
+
+            </div>
+
+          
+            <div class="motivation-message">
+
+                <p id="motivationText">
+
+                    Tu motivación aparecerá aquí.
+
+                </p>
+
+            </div>
+            <div class="motivation-stats">
+
+                <div class="motivation-stat">
+
+                    <h3 id="pendingTasksMotivation">
+                        0
+                    </h3>
+
+                    <span>
+                        Pendientes
+                    </span>
+
+                </div>
+
+                <div class="motivation-stat">
+
+                    <h3 id="completedTasksMotivation">
+                        0
+                    </h3>
+
+                    <span>
+                        Completadas
+                    </span>
+
+                </div>
+
+                <div class="motivation-stat">
+
+                    <h3 id="motivationLevel">
+                        Estable
+                    </h3>
+
+                    <span>
+                        Estado
+                    </span>
+
+                </div>
+
+            </div>
+
+        </div>
+        <section class="task-section">
+
+            <div class="section-top">
+
+                <h2>
+                    Tareas
+                </h2>
+
+            </div>
+
+            <div class="task-form">
+
+                <input
+                    type="text"
+                    id="taskTitle"
+                    placeholder="Nombre de la tarea"
+                >
+
+                <input
+                    type="date"
+                    id="taskDate"
+                >
+
+                <input
+                    type="time"
+                    id="taskTime"
+                >
+
+                <select id="taskPriority">
+
+                    <option value="alta">
+                        Prioridad Alta
+                    </option>
+
+                    <option value="media">
+                        Prioridad Media
+                    </option>
+
+                    <option value="baja">
+                        Prioridad Baja
+                    </option>
+
+                </select>
+
+                <button id="addTaskBtn">
+
+                    Agregar tarea
+
+                </button>
+
+            </div>
+
+            <div
+                class="tasks-grid"
+                id="tasksGrid"
+            >
+
+            </div>
+
+        </section>
+
+
+        <section class="flashcards-section">
+
+            <div class="section-top">
+
+                <h2>
+                    Flashcards
+                </h2>
+
+                <div class="filters">
+
+                    <select id="filterSubject">
+
+                        <option value="all">
+                            Todas las materias
+                        </option>
+
+                        <option value="Matemáticas">
+                            Matemáticas
+                        </option>
+
+                        <option value="Historia">
+                            Historia
+                        </option>
+
+                        <option value="Química">
+                            Química
+                        </option>
+
+                    </select>
+
+                    <select id="filterDifficulty">
+
+                        <option value="all">
+                            Todas las dificultades
+                        </option>
+
+                        <option value="Fácil">
+                            Fácil
+                        </option>
+
+                        <option value="Media">
+                            Media
+                        </option>
+
+                        <option value="Difícil">
+                            Difícil
+                        </option>
+
+                    </select>
+
+                    <button id="studyModeBtn">
+
+                        Estudiar flashcards
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div class="flashcard-form">
+
+                <input
+                    type="text"
+                    id="flashQuestion"
+                    placeholder="Pregunta"
+                >
+
+                <textarea
+                    id="flashAnswer"
+                    placeholder="Respuesta"
+                ></textarea>
+
+                <select id="flashSubject">
+
+                    <option value="Matemáticas">
+                        Matemáticas
+                    </option>
+
+                    <option value="Historia">
+                        Historia
+                    </option>
+
+                    <option value="Química">
+                        Química
+                    </option>
+
+                </select>
+
+                <select id="flashDifficulty">
+
+                    <option value="Fácil">
+                        Fácil
+                    </option>
+
+                    <option value="Media">
+                        Media
+                    </option>
+
+                    <option value="Difícil">
+                        Difícil
+                    </option>
+
+                </select>
+
+                <button id="addFlashcardBtn">
+
+                    Guardar flashcard
+
+                </button>
+
+            </div>
+
+            <div
+                class="study-panel hidden"
+                id="studyPanel"
+            >
+
+                <div class="study-top">
+
+                    <h3 id="studyTitle">
+
+                        Modo estudio
+
+                    </h3>
+
+                    <button id="closeStudyBtn">
+
+                        Cerrar
+
+                    </button>
+
+                </div>
+
+                <div class="study-card">
+
+                    <div
+                        class="study-inner"
+                        id="studyInner"
+                    >
+                        <div class="study-front">
+
+                            <h2 id="studyQuestion">
+
+                                Pregunta
+
+                            </h2>
+
+                        </div>
+
+                        <div class="study-back">
+
+                            <p id="studyAnswer">
+
+                                Respuesta
+
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="study-controls">
+
+                    <button id="prevFlashcard">
+
+                        Anterior
+
+                    </button>
+
+                    <button id="flipFlashcard">
+
+                        Voltear
+
+                    </button>
+
+                    <button id="nextFlashcard">
+
+                        Siguiente
+
+                    </button>
+
+                </div>
+
+            </div>
+
+
+            <div
+                class="flashcards-grid"
+                id="flashcardsGrid"
+            >
+
+            </div>
+
+        </section>
+
+    </main>
+
+</section>
+
+<script src="agenda.js"></script>
+
+
+</body>
+</html>

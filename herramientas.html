@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>
+        Herramientas | Cenith
+    </title>
+
+    <link rel="stylesheet" href="herramientas.css">
+
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+<canvas id="particles"></canvas>
+<header>
+
+    <div class="logo">
+
+        <h2>
+            Cenith
+        </h2>
+
+    </div>
+
+    <nav>
+
+        <a href="pantalla-de-inicio.html" >
+            Inicio
+        </a>
+
+        <a href="herramientas.html" class="active">
+            Herramientas
+        </a>
+
+        <a href="centro-de-videos.html">
+            Centro de Videos
+        </a>
+
+
+
+    </nav>
+
+    <div class="header-buttons">
+
+        <button id="themeToggle">
+
+            🌙
+
+        </button>
+
+    </div>
+
+</header>
+<section class="hero">
+
+    <div class="hero-content">
+
+        <h1>
+
+            Herramientas diseñadas para mejorar tu enfoque, organización y bienestar emocional.
+
+        </h1>
+
+        <p>
+
+            Organiza tus tareas, mejora tu concentración y reduce el estrés académico
+            mediante herramientas interactivas creadas para estudiantes.
+
+        </p>
+
+        <div class="hero-buttons">
+
+            <a href="#tools">
+
+                <button class="primary-btn">
+
+                    Explorar Herramientas
+
+                </button>
+
+            </a>
+
+            <a href="comenzar.html">
+
+                <button class="secondary-btn">
+
+                    Evaluación Inicial
+
+                </button>
+
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<section class="academic-status">
+
+    <div class="status-card">
+
+        <h3>
+            Estrés Académico
+        </h3>
+
+        <div class="status-bar">
+
+            <div class="status-fill stress"></div>
+
+        </div>
+
+        <span>
+            Ej.Moderado
+        </span>
+
+    </div>
+
+    <div class="status-card">
+
+        <h3>
+            Organización
+        </h3>
+
+        <div class="status-bar">
+
+            <div class="status-fill organization"></div>
+
+        </div>
+
+        <span>
+            Ej.Buena
+        </span>
+
+    </div>
+
+    <div class="status-card">
+
+        <h3>
+            Productividad
+        </h3>
+
+        <div class="status-bar">
+
+            <div class="status-fill productivity"></div>
+
+        </div>
+
+        <span>
+            Ej.Alta
+        </span>
+
+    </div>
+
+</section>
+
+
+<section class="quick-access">
+
+    <h2>
+        ¿Qué necesitas hoy?
+    </h2>
+
+    <p>
+        Selecciona una opción y entra directamente a la herramienta ideal para ti.
+    </p>
+
+    <div class="quick-grid">
+
+        <a href="pomodoro.html" class="quick-card">
+
+            <div class="quick-glow"></div>
+
+            <h3>
+                Concentrarme
+            </h3>
+
+            <p>
+                Usa sesiones inteligentes de estudio y descanso.
+            </p>
+
+        </a>
+
+        <a href="agenda.html" class="quick-card">
+
+            <div class="quick-glow"></div>
+
+            <h3>
+                Organizarme
+            </h3>
+
+            <p>
+                Controla tareas, fechas y carga académica.
+            </p>
+
+        </a>
+
+        <a href="respiracion.html" class="quick-card">
+
+            <div class="quick-glow"></div>
+
+            <h3>
+                Relajarme
+            </h3>
+
+            <p>
+                Técnicas guiadas para disminuir ansiedad y estrés.
+            </p>
+
+        </a>
+
+    </div>
+
+</section>
+
+<section class="tools-section" id="tools">
+
+    <div class="section-title">
+
+        <span>
+            Herramientas Inteligentes
+        </span>
+
+        <h2>
+            Diseñadas para estudiantes
+        </h2>
+
+    </div>
+
+
+    <div class="tool-card">
+
+        <div class="tool-info">
+
+            <div class="tool-tag">
+
+                Productividad
+
+            </div>
+
+            <h2>
+                Pomodoro Inteligente
+            </h2>
+
+            <p>
+
+                Organiza sesiones de estudio automáticas según el tiempo
+                que deseas estudiar. La herramienta divide tu tiempo,
+                crea descansos inteligentes y muestra tu progreso en tiempo real.
+
+            </p>
+
+            <ul>
+
+                <li>
+                    Sesiones automáticas de estudio
+                </li>
+
+                <li>
+                    Descansos inteligentes
+                </li>
+
+                <li>
+                    Seguimiento de productividad
+                </li>
+
+                <li>
+                    Progreso visual interactivo
+                </li>
+
+            </ul>
+
+            <a href="pomodoro.html">
+
+                <button>
+
+                    Abrir Herramienta
+
+                </button>
+
+            </a>
+
+        </div>
+
+        <div class="tool-preview">
+
+            <div class="pomodoro-preview">
+
+                <div class="circle">
+
+                    <span>
+                        25m
+                    </span>
+
+                </div>
+
+                <div class="preview-info">
+
+                    <h3>
+                        Sesión Activa
+                    </h3>
+
+                    <p>
+                        45% completado
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="tool-card reverse">
+
+        <div class="tool-preview">
+
+            <div class="breathing-preview">
+
+                <div class="breath-circle"></div>
+
+            </div>
+
+        </div>
+
+        <div class="tool-info">
+
+            <div class="tool-tag">
+
+                Bienestar
+
+            </div>
+
+            <h2>
+                Respiración Guiada
+            </h2>
+
+            <p>
+
+                Técnicas científicas de respiración para disminuir ansiedad,
+                recuperar concentración y reducir saturación mental antes
+                de estudiar o descansar.
+
+            </p>
+
+            <ul>
+
+                <li>
+                    Técnicas de respiración reconocidas
+                </li>
+
+                <li>
+                    Ritmos visuales guiados
+                </li>
+
+                <li>
+                    Sesiones adaptadas a tu estado mental
+                </li>
+
+                <li>
+                    Seguimiento de ciclos y duración
+                </li>
+
+            </ul>
+
+            <a href="respiracion.html">
+
+                <button>
+
+                    Abrir Herramienta
+
+                </button>
+
+            </a>
+
+        </div>
+
+    </div>
+    <div class="tool-card">
+
+        <div class="tool-info">
+
+            <div class="tool-tag">
+
+                Organización
+
+            </div>
+
+            <h2>
+                Agenda Inteligente
+            </h2>
+
+            <p>
+
+                Administra tareas, fechas, prioridades y flashcards
+                desde un solo lugar. La agenda analiza tu carga académica
+                y te ayuda a organizar mejor tu tiempo.
+
+            </p>
+
+            <ul>
+
+                <li>
+                    Calendario interactivo
+                </li>
+
+                <li>
+                    Gestión de tareas
+                </li>
+
+                <li>
+                    Flashcards inteligentes
+                </li>
+
+                <li>
+                    Análisis de carga académica
+                </li>
+
+            </ul>
+
+            <a href="agenda.html">
+
+                <button>
+
+                    Abrir Herramienta
+
+                </button>
+
+            </a>
+
+        </div>
+
+        <div class="tool-preview">
+
+            <div class="agenda-preview">
+
+                <div class="mini-calendar">
+
+                    <div></div>
+                    <div></div>
+                    <div class="active-day"></div>
+                    <div></div>
+                    <div></div>
+                    <div class="active-day"></div>
+
+                </div>
+
+                <div class="task-lines">
+
+                    <span></span>
+                    <span></span>
+                    <span></span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+<section class="final-section">
+
+    <div class="final-card">
+
+        <h2>
+            La escuela no define tu valor,
+            pero puede ayudarte a construir tu futuro.
+        </h2>
+
+        <p>
+
+            Aprender a organizarte, descansar y manejar el estrés
+            también forma parte del crecimiento académico.
+
+        </p>
+
+    </div>
+
+</section>
+
+
+<footer>
+
+    <div>
+
+        <h3>Cenith</h3>
+
+        <p>
+            Plataforma interactiva para bienestar académico.
+        </p>
+
+    </div>
+
+    <div>
+
+        <h3>Nuestras Redes Sociales</h3>
+
+        <ul class="social-list">
+
+            <li>
+                <a href="https://www.instagram.com/vaale.vz?igsh=aGh6bzVneGZuOGU3">
+                    Valeria Sánchez
+                </a>
+            </li>
+
+            <li>
+                <a href="https://www.instagram.com/nny_scc?igsh=MWdhbGM0MXJoOGY4NQ==">
+                    Daniela Sánchez
+                </a>
+            </li>
+
+        </ul>
+
+    </div>
+
+</footer>
+
+<script>
+
+const canvas = document.getElementById("particles");
+const ctx = canvas.getContext("2d");
+
+canvas.width = window.innerWidth;
+canvas.height = window.innerHeight;
+
+let particles = [];
+
+for(let i = 0; i < 90; i++){
+
+    particles.push({
+
+        x:Math.random() * canvas.width,
+        y:Math.random() * canvas.height,
+
+        r:Math.random() * 3,
+
+        dx:(Math.random() - 0.5) * 0.5,
+        dy:(Math.random() - 0.5) * 0.5
+    });
+}
+
+function animate(){
+
+    ctx.clearRect(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
+
+    particles.forEach(p => {
+
+        p.x += p.dx;
+        p.y += p.dy;
+
+        if(p.x < 0 || p.x > canvas.width){
+            p.dx *= -1;
+        }
+
+        if(p.y < 0 || p.y > canvas.height){
+            p.dy *= -1;
+        }
+
+        ctx.beginPath();
+
+        ctx.fillStyle =
+        "rgba(124,58,237,0.35)";
+
+        ctx.arc(
+            p.x,
+            p.y,
+            p.r,
+            0,
+            Math.PI * 2
+        );
+
+        ctx.fill();
+    });
+
+    requestAnimationFrame(animate);
+}
+
+animate();
+
+</script>
+<script>
+
+const themeToggle =
+document.getElementById("themeToggle");
+
+
+if(localStorage.getItem("theme") === "dark"){
+
+    document.body.classList.add("dark-mode");
+
+    themeToggle.innerHTML = "☀️";
+}
+
+themeToggle.addEventListener("click", () => {
+
+    document.body.classList.toggle("dark-mode");
+
+    if(document.body.classList.contains("dark-mode")){
+
+        localStorage.setItem("theme", "dark");
+
+        themeToggle.innerHTML = "☀️";
+
+    }else{
+
+        localStorage.setItem("theme", "light");
+
+        themeToggle.innerHTML = "🌙";
+    }
+
+});
+
+</script>
+
+</body>
+</html>

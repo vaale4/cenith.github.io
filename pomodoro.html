@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Pomodoro Pro</title>
+
+<link rel="stylesheet" href="pomodoro.css">
+
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+<header>
+<div class="logo">
+
+        <h2>
+            Cenith
+        </h2>
+
+    </div>
+
+    <nav>
+
+        <a href="pantalla-de-inicio.html" class="active">
+            Inicio
+        </a>
+
+        <a href="herramientas.html">
+            Herramientas
+        </a>
+
+        <a href="centro-de-videos.html">
+            Centro de Videos
+        </a>
+
+
+    </nav>
+
+    <div class="header-buttons">
+
+        <button id="themeToggle">
+
+            🌙
+
+        </button>
+
+    </div>
+</header>
+
+<section class="pomodoro-container">
+
+    <div class="setup-box" id="setupBox">
+
+        <h2>Configura tu sesión</h2>
+
+        <p>¿Cuántas horas quieres estudiar?</p>
+
+        <input type="number" id="studyHours" placeholder="Ejemplo: 3">
+
+        <button onclick="generatePlan()">
+            Generar sesión
+        </button>
+
+    </div>
+
+    <div class="timer-box hidden" id="timerBox">
+
+        <div class="top-info">
+
+            <h2>Study Session</h2>
+
+            <div class="study-time">
+                <span id="sessionInfo">
+                    25m / 3h 00m
+                </span>
+            </div>
+
+
+            <div class="progress-bar">
+
+                <div class="progress" id="progress"></div>
+
+            </div>
+
+            <p class="percentage" id="percentage">
+                0%
+            </p>
+
+        </div>
+
+        <div class="circle-container">
+
+            <div class="circle" id="circle">
+
+                <div class="inner-circle">
+
+                    <p class="focus">
+                        FOCUS
+                    </p>
+
+                    <h1 id="timer">
+                        25:00
+                    </h1>
+
+                    <p class="mini-time" id="elapsed">
+                        00:00
+                    </p>
+
+                    <div class="session-number" id="sessionNumber">
+                        1
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="buttons">
+
+            <button onclick="startPomodoro()">
+                Iniciar
+            </button>
+
+            <button onclick="pausePomodoro()">
+                Pausar
+            </button>
+
+            <button onclick="resetPomodoro()">
+                Reiniciar
+            </button>
+
+            <button onclick="backToSetup()">
+                Cambiar tiempo
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+<script>
+
+
+let totalStudyMinutes = 0;
+let totalStudySeconds = 0;
+
+let currentTime = 25 * 60;
+
+let timer;
+let isRunning = false;
+
+let completedSeconds = 0;
+
+let session = 1;
+
+function generatePlan() {
+
+    const hours =
+        document.getElementById("studyHours").value;
+
+    if (hours <= 0) {
+        alert("Ingresa una cantidad válida");
+        return;
+    }
+
+    totalStudyMinutes = hours * 60;
+
+    totalStudySeconds =
+        totalStudyMinutes * 60;
+
+    document.getElementById("setupBox")
+        .classList.add("hidden");
+
+    document.getElementById("timerBox")
+        .classList.remove("hidden");
+
+    updateSessionInfo(hours);
+
+    updateDisplay();
+}
+
+
+function updateSessionInfo(hours) {
+
+    document.getElementById("sessionInfo")
+        .innerText =
+        `25m / ${hours}h 00m`;
+}
+
+
+function updateDisplay() {
+
+    let min =
+        Math.floor(currentTime / 60);
+
+    let sec =
+        currentTime % 60;
+
+    document.getElementById("timer")
+        .innerText =
+        `${min}:${sec < 10 ? "0" : ""}${sec}`;
+
+
+    let elapsedMinutes =
+        Math.floor(completedSeconds / 60);
+
+    let elapsedSeconds =
+        completedSeconds % 60;
+
+    document.getElementById("elapsed")
+        .innerText =
+        `${elapsedMinutes}:${elapsedSeconds < 10 ? "0" : ""}${elapsedSeconds}`;
+
+
+    let percent =
+        Math.floor(
+            (completedSeconds / totalStudySeconds)
+            * 100
+        );
+
+    document.getElementById("percentage")
+        .innerText =
+        `${percent}%`;
+
+
+
+    document.getElementById("progress")
+        .style.width =
+        `${percent}%`;
+
+
+
+
+
+
+    const degrees =
+        (completedSeconds / totalStudySeconds)
+        * 360;
+
+    document.getElementById("circle")
+        .style.background =
+        `
+        conic-gradient(
+            #7c3aed 0deg,
+            #4f46e5 ${degrees}deg,
+            #dbe4ff ${degrees}deg,
+            #dbe4ff 360deg
+        )
+        `;
+}
+
+
+
+
+
+
+function startPomodoro() {
+
+    if (isRunning) return;
+
+    isRunning = true;
+
+    timer = setInterval(() => {
+
+        currentTime--;
+
+        completedSeconds++;
+
+        updateDisplay();
+
+
+
+
+
+        if (currentTime <= 0) {
+
+            session++;
+
+            document.getElementById("sessionNumber")
+                .innerText = session;
+
+            currentTime = 25 * 60;
+
+            alert("Nueva sesión iniciada");
+        }
+
+
+
+
+
+        if (completedSeconds >= totalStudySeconds) {
+
+            clearInterval(timer);
+
+            alert("Completaste tu meta de estudio");
+
+            isRunning = false;
+        }
+
+    }, 1000);
+}
+
+function pausePomodoro() {
+
+    clearInterval(timer);
+
+    isRunning = false;
+}
+
+
+
+
+
+function resetPomodoro() {
+
+    clearInterval(timer);
+
+    isRunning = false;
+
+    currentTime = 25 * 60;
+
+    completedSeconds = 0;
+
+    session = 1;
+
+    document.getElementById("sessionNumber")
+        .innerText = 1;
+
+    updateDisplay();
+}
+
+
+
+
+
+function backToSetup() {
+
+    resetPomodoro();
+
+    document.getElementById("timerBox")
+        .classList.add("hidden");
+
+    document.getElementById("setupBox")
+        .classList.remove("hidden");
+}
+
+</script>
+<script>
+
+
+
+
+
+const themeToggle =
+document.getElementById("themeToggle");
+
+if(localStorage.getItem("theme") === "dark"){
+
+    document.body.classList.add("dark-mode");
+
+    themeToggle.innerHTML = "☀️";
+}
+
+themeToggle.addEventListener("click", () => {
+
+    document.body.classList.toggle("dark-mode");
+
+    if(document.body.classList.contains("dark-mode")){
+
+        localStorage.setItem("theme", "dark");
+
+        themeToggle.innerHTML = "☀️";
+
+    }else{
+
+        localStorage.setItem("theme", "light");
+
+        themeToggle.innerHTML = "🌙";
+    }
+
+});
+
+</script>
+
+</body>
+</html>
